@@ -2,7 +2,7 @@ from functools import partial
 from yaml import load, Loader
 
 
-class Section:
+class Parser:
     def __init__(self, content, parser=partial(load, Loader=Loader)):
         self.content = parser(content)
 
