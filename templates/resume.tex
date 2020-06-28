@@ -1,0 +1,30 @@
+\cvsection{Education}
+\begin{cventries}
+    \cventry
+      {\var{school.degree}}
+      {\var{school.name}}
+      {\var{school.location}}
+      {\var{school.graduation}}
+      {\begin{cvitems}
+        \block{ for course in school.coursework }
+        \item {\var{course}}
+        \block{ endfor }
+      \end{cvitems}}
+\end{cventries}
+
+
+\cvsection{Work Experience}
+\begin{cventries}
+    \block{ for job in jobs }
+    \cventry
+      {\var{job.position}}
+      {\var{job.company}}
+      {\var{job.location}}
+      {\var{job.duration}}
+      {\begin{cvitems}
+        \block{ for item in job.description }
+        \item \var{item}
+        \block{ endfor }
+      \end{cvitems}}
+    \block{ endfor }
+\end{cventries}

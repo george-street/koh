@@ -23,3 +23,27 @@ def render_template(name, template_dir="templates", **kwargs):
         env = Environment(loader=PackageLoader('template', template_dir),
                           autoescape=select_autoescape(['html', 'xml']))
     return env.get_template(name).render(**kwargs)
+
+
+def load_data(config):
+    if type(config) == str:
+        return Parser.from_file(config)
+    elif type(config) == list:
+        return list(map(load_data, config))
+    elif type(config) == dict:
+        data = {}
+        for k, v in config.items():
+            data[k] = load_data(v)
+        return data
+
+
+def main(config):
+    config = Parser.from_file(config)
+
+    for template, bindings in config.items():
+        data = load_data(bindings)
+        print(render_template(template, **data))
+
+
+if __name__ == "__main__":
+    main("config.yaml")
